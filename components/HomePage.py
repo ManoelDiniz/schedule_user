@@ -1,6 +1,7 @@
 import customtkinter as ctk
 from  components.Calendar import *
 from components.Task import *
+from components.PriorityLevels import *
 
 def HomePage(name_user, user):
     Home = ctk.CTk()
@@ -32,6 +33,15 @@ def HomePage(name_user, user):
             widget.destroy()
         CreateTask(home_frame, user)  
     ctk.CTkButton(master=Home, text='Criar Tarefas', width=150,command=task).place(x=15,y=125)
+    
+    ctk.CTkButton(master=Home, text='Editar Tarefas', width=150).place(x=15,y=165)
+    def levels():
+        for widget in home_frame.winfo_children():
+            widget.destroy()
+        PriorityLevels(home_frame)
+    ctk.CTkButton(master=Home, text='Niveis de pioridade', width=150,command=levels).place(x=15,y=205)
+    
+    
     
 
    

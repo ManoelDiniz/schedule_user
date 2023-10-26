@@ -1,6 +1,7 @@
 import customtkinter as ctk
 from tkcalendar import DateEntry
 from services.CreateTaskService import *
+from database.queryDb import *
 
 
 def CreateTask(home_frame, user):
@@ -29,12 +30,21 @@ def CreateTask(home_frame, user):
 
     Input_descri = ctk.CTkEntry(master=home_frame, placeholder_text='Insira a descrição de sua tarefa', width=350)
     Input_descri.place(x=100, y=150)
+    
+    
+    options = getNivelL()
+    
+       
+    box = ctk.CTkOptionMenu(master=home_frame,values=options, width=350)
+    box.place(x=100, y=200)
+
     def CreateTask():
         name_task = input_name.get()
         dat_task = input_datask.get_date()
         descri = Input_descri.get()
+        namep = box.get()
         
-        CreateTaskService(name_task,dat_task,descri,user)
+        CreateTaskService(name_task,dat_task,descri,user, namep)
         
     
-    ctk.CTkButton(master=home_frame, text="Criar Tarefa", width=200, command=CreateTask).place(x=100,y=200)
+    ctk.CTkButton(master=home_frame, text="Criar Tarefa", width=200, command=CreateTask).place(x=100,y=250)

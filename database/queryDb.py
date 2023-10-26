@@ -51,9 +51,37 @@ def getTask(name_task, user):
     else:
         return None
 
-def createTask(name_task, dat_task, descri, user):
+def createTask(name_task, dat_task, descri, user,id_level):
     cursor.execute(
-        "INSERT INTO task (userId, name_task, description, dat_task) VALUES (?, ?, ?, ?)",
-        (user, name_task, descri, dat_task)
+        "INSERT INTO task (userId, name_task, description, dat_task,priority_levels) VALUES (?, ?, ?, ?,?)",
+        (user, name_task, descri, dat_task,id_level)
     )
     conn.commit()
+def createNivels(namep, nivel, emoji):
+    cursor.execute("""
+                   INSERT INTO levels(name_levels,nivel_levels,emojis) VALUES  (?,?,?)
+                   """,(namep, nivel, emoji))
+    conn.commit()
+def getNivel(namep):
+    cursor.execute("SELECT id FROM levels WHERE name_levels=?", (namep,))
+
+    result = cursor.fetchone()
+    
+    if result is not None:
+        return result[0]  
+    else:
+        return None
+    
+def getNivelL():
+    cursor.execute("""
+        SELECT name_levels FROM levels
+    """)
+    results = cursor.fetchall()
+    return [result[0] for result in results]
+
+def get():
+    cursor.execute("""
+        SELECT name_levels,nivel_levels FROM levels order by nivel_levels asc
+    """)
+    results = cursor.fetchall()
+    return results
