@@ -3,6 +3,7 @@ from services.Authenticateservice import *
 import customtkinter as ctk
 from tkinter import *
 import tkinter as tk
+from tkinter import PhotoImage
 
 
 
@@ -12,25 +13,14 @@ def tema():
 
 def tela(janela):
         janela.geometry("700x400")
-        janela.title("Login Infarma Utility")
+        janela.title("Mv Agenda")
 def telaLogin (janela):
-        
-        label_img = ctk.CTkButton(
-            master=janela,
-            
-            hover_color="none",
-            bg_color="transparent",
-            fg_color=None,
-            text=None,
-            hover=None,
-        )
-        label_img.place(x=35, y=65)
         labeltt = ctk.CTkLabel(
             master=janela,
-            text="Bem vindo \n ao \n Infarma Integrações",
-            font=("Arial", 18),
+            text="Bem Vindo ao \nMV Agenda",
+            font=("Cambria", 55),
         )
-        labeltt.place(x=175, y=150)
+        labeltt.place(x=5, y=100)
         # frame
         login_frame = ctk.CTkFrame(master=janela, width=350, height=396)
         login_frame.pack(side=RIGHT)
