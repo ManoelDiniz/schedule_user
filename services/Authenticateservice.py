@@ -1,8 +1,9 @@
 import bcrypt
-from database.createDb import *
+from database.queryDb import *
 from tkinter import messagebox
+from components.HomePage import *
 
-def authenticateservice(login, password):
+def AuthenticateService(login, password,janela):
     if login == '' or password == '':
         messagebox.showerror(title='Erro', message='Campo Usuario ou Senha Não pode \nFicar em branco ')
     else:
@@ -15,7 +16,9 @@ def authenticateservice(login, password):
             if get_pass is not None:
                 verify_pass = bcrypt.checkpw(password.encode('utf-8'), get_pass.encode('utf-8'))    
                 if verify_pass:
-                    messagebox.showinfo(title='Sucesso', message='Autenticação bem-sucedida')
+                    janela.destroy()
+                    name_user = getNameUser(user)                    
+                    HomePage(name_user,user)
                 else:
                     messagebox.showerror(title='Erro', message='Senha incorreta')
             else:

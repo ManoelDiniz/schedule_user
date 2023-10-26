@@ -16,7 +16,7 @@ class Application:
         tela(janela)
         telaLogin(janela)        
         janela.mainloop()    
-    
+        
    
 
 Application()

@@ -1,5 +1,5 @@
 import customtkinter as ctk
-from services.Register import *
+from services.RegisterUserService import *
 
 def register():
     janela_registro = ctk.CTk()
@@ -10,7 +10,7 @@ def register():
 
     def tela(janela_registro):
         janela_registro.geometry("250x300")
-        janela_registro.title("Registro - Infarma Utility")
+        janela_registro.title("Registro")
     
     tela(janela_registro)
     
@@ -23,12 +23,12 @@ def register():
     entryname.place(x=25, y=105)
     entrylogin = ctk.CTkEntry(master=registro_frame, placeholder_text='Insira seu login', width=200)
     entrylogin.place(x=25, y=145)
-    entrypass = ctk.CTkEntry(master=registro_frame, placeholder_text='Insira seu password', width=200, show='*')
+    entrypass = ctk.CTkEntry(master=registro_frame, placeholder_text='Insira sua senha', width=200, show='*')
     entrypass.place(x=25, y=185)
     
     def registrar():
-        login = entryname.get()
-        name = entrylogin.get()
+        name = entryname.get()
+        login = entrylogin.get()
         passw = entrypass.get()
         RegisterService(login, name, passw)
     
