@@ -71,6 +71,6 @@ def telaLogin (janela):
             AuthenticateService(login,password,janela)
             
         button = ctk.CTkButton(master=login_frame, text='ENTRAR', command=login)
-        button.place(x=25,y=265)
+        button.place(x=80,y=265)
         buttonregister = ctk.CTkButton(master=login_frame, text='Registrar', command=register)
-        buttonregister.place(x=25,y=305)
+        buttonregister.place(x=80,y=305)

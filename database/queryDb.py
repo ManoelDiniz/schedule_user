@@ -63,7 +63,7 @@ def createNivels(namep, nivel, emoji):
                    """,(namep, nivel, emoji))
     conn.commit()
 def getNivel(namep):
-    cursor.execute("SELECT id FROM levels WHERE name_levels=?", (namep,))
+    cursor.execute("SELECT nivel_levels FROM levels WHERE name_levels=?", (namep,))
 
     result = cursor.fetchone()
     
@@ -85,3 +85,78 @@ def get():
     """)
     results = cursor.fetchall()
     return results
+def getCalendarTask(selected_date,user):
+    
+    cursor.execute("""
+                   SELECT priority_levels, name_task, description,a.Flg_finish,t.id 
+                   FROM task 
+                   AS T INNER JOIN taskfinish as a on t.id=a.taskId
+                   WHERE strftime('%d/%m/%Y', dat_task) = ? and userId=?""", 
+                   (selected_date,user))
+    
+    results = cursor.fetchall()
+    return results
+def getEditTasks(user):
+    
+    cursor.execute("""
+                   SELECT t.id, priority_levels, name_task, description,a.Flg_finish FROM task as t
+                   INNER JOIN taskfinish as a on t.id=a.taskId 
+                   where userId=?
+                   """,(user,))
+    
+    results = cursor.fetchall()
+    return results
+
+def alterNameTask(name,id,user):
+    cursor.execute("""
+                   UPDATE TASK SET NAME_TASK=? WHERE ID= ? and userId=?
+                   """,(name, id, user,))
+    conn.commit()
+def alterDescTask(desc,id,user):
+    cursor.execute("""
+                   UPDATE TASK SET description=? WHERE ID= ? and userId=?
+                   """,(desc, id, user,))
+    conn.commit()
+def alterNivelTask(nivels,id,user):
+    cursor.execute("""
+                   UPDATE TASK SET priority_levels=? WHERE ID= ? and userId=?
+                   """,(nivels, id, user,))
+    conn.commit()
+def getIdLevel(namep):
+    cursor.execute("""
+                   select id from levels where name_levels=?
+                   """,(namep,))
+def alterAllTask(name,desc,nivels,id, user):
+    cursor.execute("""
+                   UPDATE TASK SET priority_levels=?, description=?,
+                   NAME_TASK=?,  WHERE ID= ? and userId=?
+                   """,(nivels,desc,name, id, user,))
+    conn.commit()
+def deleteTask(id):
+    cursor.execute("""
+                   Delete from task where id=?
+                   """,(id,))
+    
+    conn.commit()
+def taskFinish(id):
+    cursor.execute("""
+                   UPDATE taskfinish set Flg_finish='1' ,  dat_finish = strftime('%s', 'now') where taskid=?
+                   """,(id,))
+    conn.commit()
+    
+def rollbackTask(id):
+    cursor.execute("""
+                   UPDATE taskfinish set Flg_finish=0 ,  dat_finish = '' where taskid=?
+                   """,(id,))
+    conn.commit()
+def qnt_task():
+    cursor.execute("""
+                   SELECT COUNT(*) FROM task WHERE DAT_TASK = strftime('%Y-%m-%d', 'now')
+                   """)
+    result = cursor.fetchone()
+        
+    if result is not None:
+        return result[0]  
+    else:
+        return None
+    

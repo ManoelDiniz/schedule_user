@@ -6,7 +6,7 @@ from database.queryDb import *
 
 def CreateTask(home_frame, user):
     
-    ctk.CTkLabel(master=home_frame, text="Bem Vindo à Tela de Criação de Tarefas", font=("Arial", 25)).place(x=5, y=5)
+    ctk.CTkLabel(master=home_frame, text=" Tela de Criação de Tarefas", font=("Arial", 25)).place(x=5, y=5)
 
     input_name = ctk.CTkEntry(master=home_frame, placeholder_text='Insira o nome de sua tarefa', width=350)
     input_name.place(x=100, y=50)
@@ -29,15 +29,12 @@ def CreateTask(home_frame, user):
     input_datask.place(x=215, y=100)
 
     Input_descri = ctk.CTkEntry(master=home_frame, placeholder_text='Insira a descrição de sua tarefa', width=350)
-    Input_descri.place(x=100, y=150)
+    Input_descri.place(x=100, y=150)   
     
-    
-    options = getNivelL()
-    
+    options = getNivelL()    
        
     box = ctk.CTkOptionMenu(master=home_frame,values=options, width=350)
     box.place(x=100, y=200)
-
     def CreateTask():
         name_task = input_name.get()
         dat_task = input_datask.get_date()
