@@ -41,6 +41,7 @@ def HomePage(name_user, user):
         PriorityLevels(home_frame)
     ctk.CTkButton(master=Home, text='Niveis de pioridade', width=150,command=levels).place(x=15,y=205)
     
+    ctk.CTkButton(master=Home, text='Tarefas Salvas', width=150).place(x=15,y=245) 
     
     
 
